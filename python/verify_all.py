@@ -7,11 +7,11 @@ Reproducible Verification & Experimental Suite for:
 This script independently verifies:
 1. Exhaustive enumeration of all connected simple graphs on n = 3, 4, 5, 6 vertices
    (matching the exact counts 2, 6, 21, 112 non-isomorphic connected graphs via
-   canonical spectrum/degree/transmission checks and exact graph isomorphism),
+   exact graph isomorphism),
    identifying ALL minimal counterexamples to:
    - Zhou–Wang–Chai (2025): U_r(G) <= W(G) + C(r+2, 3)
    - Alhevaz–Baghipur–Ganie–Pirzada (2021): M_k^Q(G) <= W(G) + C(k+2, 3) (G != P_n)
-2. Exact symbolic characteristic polynomials (SymPy) and exact rational orthogonal
+2. Exact rational orthogonal
    Ky Fan certificates for all minimal counterexamples.
 3. Asymptotic Theta(n^3) violation on three infinite families (Paths P_n, non-path
    Brooms B(n-2, 2), and unicyclic Lollipops L(3, n-3)) up to n = 100, together
@@ -24,6 +24,7 @@ This script independently verifies:
 
 import numpy as np
 import sympy as sp
+import networkx as nx
 from fractions import Fraction
 from itertools import combinations
 from math import comb
@@ -97,7 +98,7 @@ def run_minimal_certificates():
     cases = [
         ("P_4 (DL, r=2)", path_graph(4), "L", 2, [[1, 0, 0, -1], [1, -1, -1, 1]]),
         ("K_{1,3} (DL, r=2)", make_graph(4, [(0, 1), (0, 2), (0, 3)]), "L", 2, [[0, 1, -1, 0], [0, 1, 1, -2]]),
-        ("P_5 (DL, r=3)", path_graph(5), "L", 3, [[1, 0, 0, 0, -1], [0, 1, 0, -1, 0], [1, -2, 2, -2, 1]]),
+        ("P_5 (DL, r=3)", path_graph(5), "L", 3, [[1, 0, 0, 0, -1], [0, 1, 0, -1, 0], [1, -1, 0, -1, 1]]),
         ("B(3,2) (DL, r=3)", broom_graph(5), "L", 3, [[0, 0, 0, 1, -1], [2, -1, -1, 0, 0], [1, 1, 1, -1, -1]]),
         ("B(4,2) (DQ, k=3)", broom_graph(6), "Q", 3, [[0, 0, 0, 0, 1, -1], [2, 1, 1, 1, 2, 2], [3, -2, 0, 0, -1, -1]]),
         ("L(3,3) (DQ, k=3)", lollipop_graph(6), "Q", 3, [[1, -1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 2], [1, 1, 0, 0, 2, -2]]),
@@ -147,9 +148,11 @@ def run_exhaustive_small():
                 tuple(np.round(eL, 5).tolist()),
                 tuple(np.round(eQ, 5).tolist()),
             )
-            if sig in seen:
+            graph = nx.from_numpy_array(adj)
+            bucket = seen.setdefault(sig, [])
+            if any(nx.is_isomorphic(graph, old) for old in bucket):
                 continue
-            seen[sig] = True
+            bucket.append(graph)
 
             W = int(np.sum(D) // 2)
             diam = int(np.max(D))
@@ -170,10 +173,11 @@ def run_exhaustive_small():
                 dq_corr_viols += 1
 
         print(
-            f"  n={n}: unique spectral classes={len(seen):3d} | "
+            f"  n={n}: unique graphs={sum(map(len, seen.values())):3d} | "
             f"DL viol={dl_viols:2d} | DQ(non-path) viol={dq_nonpath_viols:2d} | "
             f"Corrected DL viol={dl_corr_viols} | Corrected DQ viol={dq_corr_viols}"
         )
+        assert sum(map(len, seen.values())) == {3: 2, 4: 6, 5: 21, 6: 112}[n]
         assert dl_corr_viols == 0 and dq_corr_viols == 0
 
 
