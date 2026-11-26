@@ -1,5 +1,7 @@
 # Disproving and Correcting the Distance Laplacian and Distance Signless Laplacian Brouwer-Type Conjectures
 
+[![Build papers](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/build-papers.yml/badge.svg)](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/build-papers.yml)
+[![Verify Lean proofs](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/verify-lean.yml/badge.svg)](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/verify-lean.yml)
 [![Lean 4](https://img.shields.io/badge/Lean-4.36.0-blue.svg)](https://lean-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
