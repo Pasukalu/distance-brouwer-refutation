@@ -2,9 +2,9 @@ name: Verify numerical census and certificates
 on:
   push:
     branches: [main]
-    paths: ['python/**', 'cpp/**', 'requirements.txt', '.github/workflows/verify-numerics.yml']
+    paths: ['python/**', 'cpp/**', 'verification/**', 'requirements.txt', '.github/workflows/verify-numerics.yml']
   pull_request:
-    paths: ['python/**', 'cpp/**', 'requirements.txt', '.github/workflows/verify-numerics.yml']
+    paths: ['python/**', 'cpp/**', 'verification/**', 'requirements.txt', '.github/workflows/verify-numerics.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,6 +19,8 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - run: python python/verify_all.py
+      - name: Independent phase-3 census (separate implementation)
+        run: python verification/phase3_independent.py
       - run: |
           g++ -O3 -std=c++17 cpp/enum_n7.cpp -o /tmp/enum_n7
           /tmp/enum_n7 > n7_masks.txt

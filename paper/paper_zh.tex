@@ -147,6 +147,15 @@ U_r(G) \le W(G) + D\binom{r+1}{2}, \qquad M_r^Q(G) \le W(G) + D\binom{r+1}{2}
 \section{Lean~4 算术验证的范围}
 伴随 Lean 模块检查整数矩阵证书、整数域的缩放 Bessel 与主序引理以及多项式不等式。一般实数谱分解、图距离到矩阵的桥接、完整图族恒等式、穷举分类及普适谱上界尚未完整形式化。数值分类不能替代严格的谱根隔离证明。
 
+\section*{声明与数据可用性}
+\emph{（投稿前须由作者确认并按目标期刊格式改写。）}
+
+\noindent\textbf{数据与代码：}全部数据与代码见公开仓库 \url{https://github.com/Pasukalu/distance-brouwer-refutation}；Lean~4 形式化位于 \texttt{lean/}，穷举枚举器位于 \texttt{cpp/} 与 \texttt{python/}，独立复算脚本为 \texttt{verification/phase3\_independent.py}，审稿报告位于 \texttt{verification/}。
+
+\noindent\textbf{独立验证：}普查、六个有理证书、修正界与 $\Theta(n^3)$ 族均由第二套独立实现复算，结果与本文表格一致；Lean 构建在 CI 中通过，无 \texttt{sorry}，18 条公理审计仅依赖 \texttt{propext}、\texttt{Classical.choice}、\texttt{Quot.sound}。
+
+\noindent\textbf{AI 工具使用：}本文、代码与形式化在 AI 辅助下完成；所有数学命题均经独立重新推导或计算复现，所有参考文献均于 2026-11-26 对照 Crossref/arXiv 核对。作者对全部内容负责。
+
 \begin{thebibliography}{99}
 \bibitem{ABGP2021}
 A.~Alhevaz, M.~Baghipur, H.~A.~Ganie, and S.~Pirzada,
@@ -178,12 +187,12 @@ Proc. Natl. Acad. Sci. USA \textbf{35} (1949), 652--655.
 S.~Huang,
 \emph{On a distance Laplacian analog of Brouwer's conjecture for several classes of graphs},
 AIMS Mathematics \textbf{11} (2026), no.~10, 33617--33633; arXiv:2606.06945.
-\url{https://arxiv.org/abs/2606.06945}
+\url{https://arxiv.org/abs/2606.06945}; \texttt{doi:10.3934/math.20261314}
 
 \bibitem{KT2026}
-K.~Kothari and A.~Tudose,
-\emph{Proof of Brouwer's Laplacian spectrum conjecture} (2026), 参见 arXiv:2607.03388 与 arXiv:2607.08452.
-\url{https://arxiv.org/html/2607.08452v2}
+P.~K.~Kothari and S.~Tudose,
+\emph{On Brouwer's Laplacian conjecture} (2026), arXiv:2606.12197.
+\url{https://arxiv.org/abs/2606.12197}
 
 \bibitem{MPK2026}
 U.~Mushtaq, S.~Pirzada, and S.~Khan,
@@ -192,25 +201,26 @@ Rev. Un. Mat. Argentina \textbf{69} (2026), no.~1, 193--202.
 \url{https://inmabb.criba.edu.ar/revuma/pdf/v69n1/v69n1a14.pdf}
 
 \bibitem{Caterpillar2026}
+A.~S.~Alali, K.~Rani, S.~A.~Mir, and J.~Nisar,
 \emph{On a spectral concentration in Brouwer-type conjecture for a uniform caterpillar graph},
-AIMS Mathematics \textbf{11} (2026), no.~5, 625.
+AIMS Mathematics \textbf{11} (2026), no.~5, 15199--15214, \texttt{doi:10.3934/math.2026625}.
 \url{https://www.sciopen.com/article/10.3934/math.2026625}
 
 \bibitem{SignlessBrouwer2026}
-\emph{On the Brouwer-type Conjecture for Signless Laplacian Eigenvalues of Graphs},
-arXiv:2609.31355 (2026).
+R.~Yuan and X.-D.~Zhang,
+\emph{On the Brouwer-type conjecture for signless Laplacian eigenvalues of graphs}
+(2026), arXiv:2609.31355.（普通无符号拉普拉斯，非距离矩阵。）
 \url{https://arxiv.org/abs/2609.31355}
 
 \bibitem{ZW2026}
-Zhang and Wang,
+Y.~Zhang, L.~Wang, and R.~Miao,
 \emph{Brouwer-type inequality on the distance signless Laplacian eigenvalues of graphs with diameters 3 and 4},
-J. Comb. Optim. \textbf{52} (2026), no.~5.
-\url{https://www.researchgate.net/publication/417768569_Brouwer-type_inequality_on_the_distance_signless_Laplacian_eigenvalues_of_graphs_with_diameters_3_and_4}
+J. Comb. Optim. \textbf{52} (2026), no.~5, article 53, \texttt{doi:10.1007/s10878-026-01488-3}.
 
 \bibitem{ZWC2025}
 Y.~Zhou, L.~Wang, and Y.~Chai,
 \emph{Brouwer type conjecture for the eigenvalues of distance Laplacian matrix of a graph},
-Comput. Appl. Math. \textbf{44} (2025), no.~3, 14.
+Comput. Appl. Math. \textbf{44} (2025), no.~3, article 138, \texttt{doi:10.1007/s40314-025-03095-0}.
 \end{thebibliography}
 
 \end{document}

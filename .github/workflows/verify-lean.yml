@@ -5,10 +5,12 @@ on:
     branches: [main]
     paths:
       - "lean/**"
+      - "verification/check_lean_hygiene.py"
       - ".github/workflows/verify-lean.yml"
   pull_request:
     paths:
       - "lean/**"
+      - "verification/check_lean_hygiene.py"
   workflow_dispatch:
 
 permissions:
@@ -21,6 +23,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+
+      - name: Lean hygiene check (no sorry/axiom, 18 axiom audits)
+        run: python3 verification/check_lean_hygiene.py
 
       - name: Install elan
         run: |

@@ -224,8 +224,23 @@ Figure~\ref{fig:profile} compares the spectral sums against the refuted and corr
 \label{fig:profile}
 \end{figure}
 
+\paragraph{Conditional dependence and independent reproduction.}
+Both ingredients of Theorem~\ref{thm:corrected} --- the Laplacian Brouwer inequality of \cite{KT2026} and its signless counterpart of \cite{SignlessBrouwer2026} --- are 2026 arXiv preprints at the time of writing, so the two displays are conditional on them; the fallback bound stated after them is unconditional. The corrected bound was additionally tested on all $994$ census graphs and on $3{,}600$ random connected graphs with $8 \le n \le 13$ (random trees and generic connected graphs) without a single violation, the smallest slack being $9.71$; the independent script is \texttt{verification/phase3\_independent.py}.
+
 \section{Scope of the Lean~4 Arithmetic Verification}
 The companion Lean modules verify concrete integer matrix certificates, scaled integer Bessel and majorization lemmas, and polynomial inequalities. The spectral lemma assumes integer spectral data, Parseval and Rayleigh expansion hypotheses; it does not establish the real spectral theorem. The graph-to-matrix bridge, graph-family identities, real Ky Fan principle, full census and universal graph-level bounds are not formally verified. The analytical proofs use the cited mathematical literature. The numerical census uses floating-point eigenvalues and is not a certified minimality proof.
+
+\section*{Statements and declarations}
+\emph{(To be confirmed by the authors before submission; adapt to the venue's required format.)}
+
+\noindent\textbf{Data and code availability.}
+All data and code are in the public repository \url{https://github.com/Pasukalu/distance-brouwer-refutation}: the Lean~4 development in \texttt{lean/}, the exhaustive enumerators in \texttt{cpp/} and \texttt{python/}, the independent census and certificate checker in \texttt{verification/phase3\_independent.py}, and the reviewer-facing reports in \texttt{verification/}. Both PDFs are rebuilt by CI from the \LaTeX{} sources.
+
+\noindent\textbf{Independent verification.}
+The census, the six rational certificates, the corrected bound and the $\Theta(n^3)$ families were reproduced by a second, independently written implementation; the results agree with the tables in this paper. The Lean build is green in CI, uses no \texttt{sorry}, and the 18 audited theorems depend only on \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound} (the CI log is public).
+
+\noindent\textbf{Use of AI tools.}
+The manuscript, the code and the formalization were prepared with substantial AI assistance. Every mathematical statement reported here was independently re-derived or computationally reproduced, and every reference was checked against Crossref and arXiv records on 2026-11-26. The authors take full responsibility for the content.
 
 \begin{thebibliography}{99}
 \bibitem{ABGP2021}
@@ -258,7 +273,7 @@ Proc. Natl. Acad. Sci. USA \textbf{35} (1949), 652--655.
 S.~Huang,
 \emph{On a distance Laplacian analog of Brouwer's conjecture for several classes of graphs},
 AIMS Mathematics \textbf{11} (2026), no.~10, 33617--33633; arXiv:2606.06945.
-\url{https://arxiv.org/abs/2606.06945}
+\url{https://arxiv.org/abs/2606.06945}; \texttt{doi:10.3934/math.20261314}
 
 \bibitem{KT2026}
 P.~K.~Kothari and S.~Tudose,
@@ -272,25 +287,26 @@ Rev. Un. Mat. Argentina \textbf{69} (2026), no.~1, 193--202.
 \url{https://inmabb.criba.edu.ar/revuma/pdf/v69n1/v69n1a14.pdf}
 
 \bibitem{Caterpillar2026}
+A.~S.~Alali, K.~Rani, S.~A.~Mir, and J.~Nisar,
 \emph{On a spectral concentration in Brouwer-type conjecture for a uniform caterpillar graph},
-AIMS Mathematics \textbf{11} (2026), no.~5, 625.
+AIMS Mathematics \textbf{11} (2026), no.~5, 15199--15214, \texttt{doi:10.3934/math.2026625}.
 \url{https://www.sciopen.com/article/10.3934/math.2026625}
 
 \bibitem{SignlessBrouwer2026}
-\emph{On the Brouwer-type Conjecture for Signless Laplacian Eigenvalues of Graphs},
-arXiv:2609.31355 (2026).
+R.~Yuan and X.-D.~Zhang,
+\emph{On the Brouwer-type conjecture for signless Laplacian eigenvalues of graphs}
+(2026), arXiv:2609.31355. (Ordinary signless Laplacian, not the distance matrix.)
 \url{https://arxiv.org/abs/2609.31355}
 
 \bibitem{ZW2026}
-Zhang and Wang,
+Y.~Zhang, L.~Wang, and R.~Miao,
 \emph{Brouwer-type inequality on the distance signless Laplacian eigenvalues of graphs with diameters 3 and 4},
-J. Comb. Optim. \textbf{52} (2026), no.~5.
-\url{https://www.researchgate.net/publication/417768569_Brouwer-type_inequality_on_the_distance_signless_Laplacian_eigenvalues_of_graphs_with_diameters_3_and_4}
+J. Comb. Optim. \textbf{52} (2026), no.~5, article 53, \texttt{doi:10.1007/s10878-026-01488-3}.
 
 \bibitem{ZWC2025}
 Y.~Zhou, L.~Wang, and Y.~Chai,
 \emph{Brouwer type conjecture for the eigenvalues of distance Laplacian matrix of a graph},
-Comput. Appl. Math. \textbf{44} (2025), no.~3, 14.
+Comput. Appl. Math. \textbf{44} (2025), no.~3, article 138, \texttt{doi:10.1007/s40314-025-03095-0}.
 \end{thebibliography}
 
 \end{document}
