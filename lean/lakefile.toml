@@ -1,0 +1,9 @@
+name = "DistanceBrouwerRefutation"
+version = "0.2.0"
+defaultTargets = ["DistanceBrouwerRefutation", "KyFanSpectral"]
+
+[[lean_lib]]
+name = "DistanceBrouwerRefutation"
+
+[[lean_lib]]
+name = "KyFanSpectral"

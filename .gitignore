@@ -1,0 +1,12 @@
+lean/.lake/
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+enum_n7
+n7_masks.txt
+.DS_Store
