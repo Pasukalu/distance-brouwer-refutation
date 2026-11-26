@@ -46,7 +46,7 @@ jobs:
           args: -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Upload ${{ matrix.pdf }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.name }}
           path: paper/${{ matrix.pdf }}
