@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Two prominent distance-matrix analogs of Brouwer's Laplacian eigenvalue sum conjecture have attracted substantial recent attention: Alhevaz, Baghipur, Ganie, and Pirzada (2021) conjectured that the sum of the $k$ largest distance signless Laplacian eigenvalues satisfies $M_k^Q(G) \le W(G) + \binom{k+2}{3}$ for every connected non-path graph $G$, while Zhou, Wang, and Chai (2025) conjectured that the sum of the $r$ largest distance Laplacian eigenvalues satisfies $U_r(G) \le W(G) + \binom{r+2}{3}$ for every connected graph $G$. Multiple papers published through November 2026 verified these bounds for restricted graph classes of small diameter or large order. In this work, we completely refute both conjectures in a strong, asymptotic sense, explain the structural mechanism behind their failure, and establish a unified corrected theorem. First, by exhaustive enumeration over all $994$ non-isomorphic connected graphs of order $n \le 7$ ($2, 6, 21, 112, 853$ graphs for $n=3,\dots,7$) and explicit rational orthogonal Ky Fan certificates, we determine all minimal counterexamples: for $D^L(G)$, the unique minimal counterexamples of order $4$ are $P_4$ and $K_{1,3}$ at $r=2$; for $D^Q(G)$ on non-path graphs, no counterexample exists for $n \le 5$, while order $6$ admits exactly six minimal counterexamples led by the unicyclic lollipop graph $L(3,3)$ and the non-path broom tree $B(4,2)$ at $k=3$. At $n=7$, $61$ graphs violate $D^L$ and $16$ non-path graphs violate $D^Q$, including $100\%$ ($9/9$) of all diameter-$5$ non-path graphs. Second, using only Schur's diagonal majorization inequality, we prove analytically that both conjectures fail simultaneously by $\Theta(n^3)$ on infinite families of paths $P_n$ ($n \ge 9$), non-path broom trees $B(n-2,2)$ ($n \ge 10$), and unicyclic lollipops $L(3,n-3)$ ($n \ge 12$), with asymptotic excess at least $\bigl(\frac{\sqrt{3}}{2}-\frac{5}{6}\bigr)n^3 \approx 0.03269\,n^3$. We also observe that uniform caterpillars of diameter at least $6$ violate Zhou--Wang--Chai's bound. Third, we identify the geometric obstruction---splitting an $r$-subset across opposite ends of a diametral path yields internal distance sum $\Theta(\diam(G)\,r^2)$ rather than $O(r^3)$---and prove the unified corrected upper bounds $U_r(G) \le W(G) + \diam(G)\binom{r+1}{2}$ and $M_r^Q(G) \le W(G) + \diam(G)\binom{r+1}{2}$ for all connected graphs $G$ of order $n \ge 2$ and all $1 \le r \le n$. All $18$ core theorems---including Bessel's inequality, Ky Fan's maximum principle from spectral decomposition, the structural transmission-subset identity, distance-threshold decomposition, all minimal certificates, all three infinite $\Theta(n^3)$ refutations, and both corrected-bound core lemmas---are formally verified in Lean~4 (v4.36.0) with zero external dependencies and zero \texttt{sorry}.
+Two prominent distance-matrix analogs of Brouwer's Laplacian eigenvalue sum conjecture have attracted substantial recent attention: Alhevaz, Baghipur, Ganie, and Pirzada (2021) conjectured that the sum of the $k$ largest distance signless Laplacian eigenvalues satisfies $M_k^Q(G) \le W(G) + \binom{k+2}{3}$ for every connected non-path graph $G$, while Zhou, Wang, and Chai (2025) conjectured that the sum of the $r$ largest distance Laplacian eigenvalues satisfies $U_r(G) \le W(G) + \binom{r+2}{3}$ for every connected graph $G$. Multiple papers published through November 2026 verified these bounds for restricted graph classes of small diameter or large order. Huang (2026) already exhibited distance Laplacian counterexamples. We extend that refutation and exhibit counterexamples to the distance signless Laplacian conjecture, explain the structural mechanism behind their failure, and establish a unified corrected theorem. First, by exhaustive enumeration over all $994$ non-isomorphic connected graphs of order $n \le 7$ ($2, 6, 21, 112, 853$ graphs for $n=3,\dots,7$) and explicit rational orthogonal Ky Fan certificates, our numerical census identifies candidate minimal counterexamples: for $D^L(G)$, the unique minimal counterexamples of order $4$ are $P_4$ and $K_{1,3}$ at $r=2$; for $D^Q(G)$ on non-path graphs, no counterexample exists for $n \le 5$, while order $6$ admits exactly six minimal counterexamples led by the unicyclic lollipop graph $L(3,3)$ and the non-path broom tree $B(4,2)$ at $k=3$. At $n=7$, $61$ graphs violate $D^L$ and $16$ non-path graphs violate $D^Q$, including $100\%$ ($9/9$) of all diameter-$5$ non-path graphs. Second, using only Schur's diagonal majorization inequality, we prove analytically that both conjectures fail by $\Theta(n^3)$ for both spectral inequalities on infinite families of paths $P_n$ ($n \ge 9$), non-path broom trees $B(n-2,2)$ ($n \ge 10$), and unicyclic lollipops $L(3,n-3)$ ($n \ge 12$), with asymptotic excess at least $\bigl(\frac{\sqrt{3}}{2}-\frac{5}{6}\bigr)n^3 \approx 0.03269\,n^3$. We also observe that uniform caterpillars of diameter at least $6$ violate Zhou--Wang--Chai's bound. Third, we identify the geometric obstruction---splitting an $r$-subset across opposite ends of a diametral path yields internal distance sum $\Theta(\diam(G)\,r^2)$ rather than $O(r^3)$---and prove the unified corrected upper bounds $U_r(G) \le W(G) + \diam(G)\binom{r+1}{2}$ and $M_r^Q(G) \le W(G) + \diam(G)\binom{r+1}{2}$ for all connected graphs $G$ of order $n \ge 2$ and all $1 \le r \le n$. Companion Lean~4 code checks integer arithmetic certificates and auxiliary lemmas; it does not formalize the general real spectral theorem or the full graph-level conclusions.
 
 \medskip
 \noindent\textbf{Keywords:} Distance Laplacian matrix; Distance signless Laplacian matrix; Brouwer's conjecture; Wiener index; Schur majorization; Ky Fan inequality; Lean~4 formal verification.
@@ -72,12 +72,12 @@ U_r(G) \le W(G) + \binom{r+2}{3}.
 \end{equation}
 \end{conjecture}
 
-Both conjectures remain actively studied throughout 2026. For Conjecture~\ref{conj:DL}, Mushtaq, Pirzada, and Khan \cite{MPK2026} verified \eqref{eq:DL-conj} for graphs in $\Gamma_n$ ($n \ge 95$), graphs with $\Delta = n-2$ ($n \ge 95$), and sun-type graphs; Huang \cite{Huang2026} proved \eqref{eq:DL-conj} for all graphs of diameter at most $D$ once $n \ge \lceil \frac{4}{9}(D+1)^3\rceil$, for graphs with $\Delta = n-k$ once $n \ge N(k)$, and for all diameter-$2$ graphs except $K_{1,3}$ at $r=2$ and $K_{1,4}$ at $r=3$; and a May 2026 study \cite{Caterpillar2026} claimed to confirm \eqref{eq:DL-conj} for uniform caterpillars of diameter at least $6$. For Conjecture~\ref{conj:DQ}, Zhang and Wang \cite{ZW2026} (November 2026) verified \eqref{eq:DQ-conj} for diameter-$3$ graphs in $\Gamma_{a+b+2}$ ($a+b \ge 97$) and diameter-$4$ graphs in $\chi_{a+b+3}$ ($a+b \ge 223$).
+Both conjectured inequalities remained subjects of research in 2026. The distance Laplacian conjecture was already disproved by Huang's explicit exceptions; we do not claim priority for that refutation. Priority for the distance signless Laplacian counterexamples remains to be established. For Conjecture~\ref{conj:DL}, Mushtaq, Pirzada, and Khan \cite{MPK2026} verified \eqref{eq:DL-conj} for graphs in $\Gamma_n$ ($n \ge 95$), graphs with $\Delta = n-2$ ($n \ge 95$), and sun-type graphs; Huang \cite{Huang2026} proved \eqref{eq:DL-conj} for all graphs of diameter at most $D$ once $n \ge \lceil \frac{4}{9}(D+1)^3\rceil$, for graphs with $\Delta = n-k$ once $n \ge N(k)$, and for all diameter-$2$ graphs except $K_{1,3}$ at $r=2$ and $K_{1,4}$ at $r=3$; and a May 2026 study \cite{Caterpillar2026} claimed to confirm \eqref{eq:DL-conj} for uniform caterpillars of diameter at least $6$. For Conjecture~\ref{conj:DQ}, Zhang and Wang \cite{ZW2026} (November 2026) verified \eqref{eq:DQ-conj} for diameter-$3$ graphs in $\Gamma_{a+b+2}$ ($a+b \ge 97$) and diameter-$4$ graphs in $\chi_{a+b+3}$ ($a+b \ge 223$).
 
-\takeaway{Main Results}{We prove that Conjectures~\ref{conj:DQ} and \ref{conj:DL} are both false---not merely on isolated small exceptions, but asymptotically by $\Theta(n^3)$ across infinite families of paths, non-path trees, and unicyclic graphs. We exhaustively classify all $994$ connected graphs of order $n \le 7$, explain why $\binom{r+2}{3}$ is structurally the wrong penalty term, prove the unified corrected bound $W(G) + \diam(G)\binom{r+1}{2}$, and formally verify all $18$ core theorems (including Ky Fan's maximum principle itself) in Lean~4.}
+\takeaway{Main Results}{We extend the known refutation of Conjecture~\ref{conj:DL} and give counterexamples to Conjecture~\ref{conj:DQ}---not merely on isolated small exceptions, but asymptotically by $\Theta(n^3)$ across infinite families of paths, non-path trees, and unicyclic graphs. We exhaustively classify all $994$ connected graphs of order $n \le 7$, explain why $\binom{r+2}{3}$ is structurally the wrong penalty term, prove the unified corrected bound $W(G) + \diam(G)\binom{r+1}{2}$, and provide Lean~4 verification of selected arithmetic certificates and lemmas.}
 
 \section{Preliminaries}
-We rely on three foundational tools, all formally verified in our companion Lean~4 modules.
+We rely on three foundational tools. Our companion Lean~4 modules verify restricted arithmetic formulations, not their full real-matrix versions.
 
 \begin{lemma}[Ky Fan Maximum Principle \cite{Fan1949}]\label{lem:kyfan}
 Let $M \in \mathbb{R}^{n \times n}$ be real symmetric with eigenvalues $\lambda_1 \ge \dots \ge \lambda_n$. For any $1 \le r \le n$ and any pairwise orthogonal nonzero vectors $v_1, \dots, v_r \in \mathbb{R}^n$,
@@ -103,7 +103,7 @@ D^Q(G) &= \bigl((n-2)I + J\bigr) + \sum_{s=2}^{D} Q(Y_s). \label{eq:DQ-decomp}
 \end{lemma}
 
 \section{Exhaustive Classification for $n \le 7$ and Minimal Rational Certificates}
-We performed a complete exhaustive enumeration of all $994$ non-isomorphic connected simple graphs of order $n \in \{3, 4, 5, 6, 7\}$ (matching OEIS A001349: $2, 6, 21, 112, 853$). Table~\ref{tab:exhaustive} summarizes the violation counts and maximum excesses across all five orders, and Figure~\ref{fig:exhaustive} illustrates both the order-wise rates and the sharp diameter phase transition at $n = 7$, where $100\%$ ($9/9$) of all diameter-$5$ non-path graphs violate both conjectures simultaneously while $0/994$ graphs violate our corrected bound of Theorem~\ref{thm:corrected}.
+We performed a numerical census of all $994$ non-isomorphic connected simple graphs of order $n \in \{3, 4, 5, 6, 7\}$ (matching OEIS A001349: $2, 6, 21, 112, 853$). Table~\ref{tab:exhaustive} summarizes the violation counts and maximum excesses across all five orders, and Figure~\ref{fig:exhaustive} illustrates both the order-wise rates and the sharp diameter phase transition at $n = 7$, where $100\%$ ($9/9$) of all diameter-$5$ non-path graphs violate both conjectures simultaneously while $0/994$ graphs violate our corrected bound of Theorem~\ref{thm:corrected}.
 
 \begin{table}[!htbp]
 \centering
@@ -129,7 +129,7 @@ $n$ & Connected & $D^L$ Viol. & Max $D^L$ Excess & $D^Q$ (Non-Path) Viol. & Max 
 \label{fig:exhaustive}
 \end{figure}
 
-Table~\ref{tab:minimal} records exact rational orthogonal Ky Fan certificates for the minimal counterexamples.
+Table~\ref{tab:minimal} records exact rational orthogonal Ky Fan certificates for representative counterexamples. The census counts and minimality claims below are numerical findings, pending certified spectral comparisons.
 
 \begin{table}[!htbp]
 \centering
@@ -149,15 +149,15 @@ $L(3,3)$ & 6 & $D^Q$ & 3 & $41$ & $1888/45$ & $(1,-1,0,0,0,0)$, $(1,1,1,1,1,2)$,
 \end{tabularx}
 \end{table}
 
-\begin{theorem}[Minimal Counterexamples to Conjectures~\ref{conj:DQ} and \ref{conj:DL}]\label{thm:minimal}
+\begin{proposition}[Numerical census and representative exact counterexamples to Conjectures~\ref{conj:DQ} and \ref{conj:DL}]\label{thm:minimal}
 \leavevmode
 \begin{enumerate}
 \item Conjecture~\ref{conj:DL} holds for all $n \le 3$, fails on exactly two graphs of order $n=4$ ($P_4$ and $K_{1,3}$ at $r=2$), $6$ graphs of order $n=5$ (including exact integer violations $U_3(P_5) = 33 > 30$ and $U_3(B(3,2)) = 30 > 28$), $19$ graphs of order $n=6$, and $61$ graphs of order $n=7$.
 \item Conjecture~\ref{conj:DQ} holds for all connected non-path graphs with $n \le 5$, fails on exactly $6$ non-path graphs of order $n=6$ at $k=3$, and fails on $16$ non-path graphs of order $n=7$. In particular, the $6$-vertex non-path broom tree $B(4,2)$ ($W=32$) satisfies $M_3^Q(B(4,2)) \ge \frac{646}{15} > 42$, and the $6$-vertex unicyclic lollipop $L(3,3)$ ($W=31$) satisfies $M_3^Q(L(3,3)) \ge \frac{1888}{45} > 41$.
 \end{enumerate}
-\end{theorem}
-\begin{proof}
-Direct rational arithmetic verifies pairwise orthogonality of each integer vector family in Table~\ref{tab:minimal}. For $B(4,2)$ (path $0\text{--}1\text{--}2\text{--}3$ with leaves $4,5$ on $3$), $\deg(3)=3$ ensures $B(4,2) \not\cong P_6$, and the three Rayleigh quotients for $D^Q(B(4,2))$ are $10$, $\frac{338}{15}$, and $\frac{158}{15}$, summing to $\frac{646}{15} > 42$. For $L(3,3)$ (triangle $\{0,1,2\}$ plus path $2\text{--}3\text{--}4\text{--}5$), the three Rayleigh quotients for $D^Q(L(3,3))$ are $10$, $\frac{196}{9}$, and $\frac{51}{5}$, summing to $\frac{1888}{45} > 41$. Lemma~\ref{lem:kyfan} yields the strict violations.
+\end{proposition}
+\begin{proof}[Verification of the representative certificates; classification is numerical]
+Direct rational arithmetic verifies pairwise orthogonality of each integer vector family in Table~\ref{tab:minimal}. For $B(4,2)$ (path $0\text{--}1\text{--}2\text{--}3$ with leaves $4,5$ on $3$), $\deg(3)=3$ ensures $B(4,2) \not\cong P_6$, and the three Rayleigh quotients for $D^Q(B(4,2))$ are $10$, $\frac{338}{15}$, and $\frac{158}{15}$, summing to $\frac{646}{15} > 42$. For $L(3,3)$ (triangle $\{0,1,2\}$ plus path $2\text{--}3\text{--}4\text{--}5$), the three Rayleigh quotients for $D^Q(L(3,3))$ are $10$, $\frac{194}{9}$, and $\frac{52}{5}$, summing to $\frac{1888}{45} > 41$. Lemma~\ref{lem:kyfan} yields the strict violations.
 \end{proof}
 
 \section{Asymptotic $\Theta(n^3)$ Refutation via Schur Majorization}
@@ -173,7 +173,7 @@ Let $t = \lfloor n/3 \rfloor$ and $r = 2t$. Then:
 In all three families, the excess grows at least as $\frac{5}{162} n^3 - O(n^2)$. Optimizing $r = 2\beta n$ over $\beta \in (0, \tfrac{1}{2})$ yields $\beta^* = \frac{\sqrt{3}-1}{2} \approx 0.3660$ ($r^* \approx 0.7321\,n$) and asymptotic excess at least $\bigl(\frac{\sqrt{3}}{2} - \frac{5}{6}\bigr) n^3 - O(n^2) \approx 0.032692\,n^3$.
 \end{theorem}
 \begin{proof}
-On $P_n$, taking $S = \{1,\dots,t\} \cup \{n-t+1,\dots,n\}$ gives $6 \sum_{v \in S} \Tr_{P_n}(v) = 6 n^2 t - 6 n t^2 + 4 t^3 - 4 t$. With $6 W(P_n) = n(n^2 - 1)$ and $6 \binom{2t+2}{3} = 2t(2t+1)(2t+2)$, setting $n = 3t + c$ ($c \in \{0,1,2\}$) yields $\Delta_P(3t+c, t) = 5(t-3)^3 + (33+3c)(t-3)^2 + \dots > 0$ for all $t \ge 3$ ($n \ge 9$). Reattaching leaf $n$ to $n-2$ gives $\Delta_B(n,t) = \Delta_P(n,t) - 12t + 18 > 0$ for all $t \ge 4$ and $(n,t) \in \{(10,3),(11,3)\}$. Adding edge $ab$ gives $\Delta_L(n,t) = \Delta_B(n,t) - 6 > 0$ for all $t \ge 4$ and $(10,3)$. Corollary~\ref{cor:schur} completes the proof.
+On $P_n$, taking $S = \{1,\dots,t\} \cup \{n-t+1,\dots,n\}$ gives $6 \sum_{v \in S} \Tr_{P_n}(v) = 6 n^2 t - 6 n t^2 + 4 t^3 - 4 t$. With $6 W(P_n) = n(n^2 - 1)$ and $6 \binom{2t+2}{3} = 2t(2t+1)(2t+2)$, setting $n = 3t + c$ ($c \in \{0,1,2\}$) yields $\Delta_P(3t+c, t) = 5(t-3)^3 + (33+3c)(t-3)^2 + \dots > 0$ for all $t \ge 3$ ($n \ge 9$). Reattaching leaf $n$ to $n-2$ gives $\Delta_B(n,t) = \Delta_P(n,t) - 12t + 18 > 0$ for all $t \ge 4$ and $(n,t) \in \{(10,3),(11,3)\}$. Adding edge $ab$ gives $\Delta_L(n,t) = \Delta_B(n,t) - 6 > 0$ for all $t \ge 4$ and $(10,3)$. Corollary~\ref{cor:schur} completes the proof. Paths are excluded from Conjecture~\ref{conj:DQ}, so their signless violations concern only the corresponding inequality, not the conjecture itself.
 \end{proof}
 
 Figure~\ref{fig:cubic} confirms the $\Theta(n^3)$ convergence on non-path broom trees $B(n-2,2)$ up to $n = 120$.
@@ -186,7 +186,7 @@ Figure~\ref{fig:cubic} confirms the $\Theta(n^3)$ convergence on non-path broom 
 \end{figure}
 
 \begin{remark}[Uniform Caterpillars]\label{rem:caterpillar}
-A May 2026 article \cite{Caterpillar2026} claimed that Conjecture~\ref{conj:DL} holds for all uniform caterpillars of diameter at least $6$. Direct computation refutes this claim: the $12$-vertex comb graph on $P_6$ ($\diam=7$, $W=246$) has $U_7 = 376.1092 > 366 = W + \binom{9}{3}$ (excess $+10.1092$), and the $16$-vertex comb on $P_8$ ($\diam=9$) violates \eqref{eq:DL-conj} at $r=9$ by $+5.4519$.
+A May 2026 article \cite{Caterpillar2026} claimed that Conjecture~\ref{conj:DL} holds for all uniform caterpillars of diameter at least $6$. Direct computation refutes this claim: the $12$-vertex comb graph on $P_6$ ($\diam=7$, $W=206$) has $U_7 \approx 300.1092 > 290 = W + \binom{9}{3}$ (excess $+10.1092$), and the $16$-vertex comb on $P_8$ ($\diam=9$) violates \eqref{eq:DL-conj} at $r=9$ by $+5.4519$.
 \end{remark}
 
 \section{Structural Diagnosis and Corrected Universal Brouwer-Type Bounds}
@@ -224,14 +224,8 @@ Figure~\ref{fig:profile} compares the spectral sums against the refuted and corr
 \label{fig:profile}
 \end{figure}
 
-\section{End-to-End Formal Verification in Lean~4}
-All core mathematical arguments are formally verified in a zero-dependency, two-module Lean~4.36.0 / Lake~5.0.0 project (\texttt{DistanceBrouwerRefutation.lean} and \texttt{KyFanSpectral.lean}), compiling cleanly in under $6$ seconds with zero errors, zero warnings, and zero \texttt{sorry}. Across both modules, $18$ principal theorems are audited via \texttt{\#print axioms}:
-\begin{enumerate}
-\item \textbf{Spectral \& Combinatorial Foundations:} \texttt{bessel\_inequality\_scaled}, \texttt{ky\_fan\_majorization\_lemma}, \texttt{ky\_fan\_maximum\_principle\_spectral}, \texttt{structural\_transmission\_identity}, and \texttt{distance\_threshold\_decomp}.
-\item \textbf{Minimal Counterexamples:} Distance validity, Wiener indices, non-path degrees, and cleared-denominator orthogonal Ky Fan certificates for $P_4$, $K_{1,3}$, $P_5$, $B(3,2)$, $B(4,2)$, and $L(3,3)$.
-\item \textbf{Infinite $\Theta(n^3)$ Families \& Corrected Bounds:} \texttt{sumEndTrPath\_closed\_form}, \texttt{wiener\_path\_closed\_form}, \texttt{path\_schur\_refutation\_all\_n}, \texttt{broom\_schur\_refutation\_all\_n}, \texttt{lollipop\_schur\_refutation\_all\_n}, \texttt{corrected\_DL\_core}, and \texttt{corrected\_DQ\_core}.
-\end{enumerate}
-Every theorem depends solely on Lean~4's standard core axioms (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}), with \texttt{sorryAx} completely absent. Companion C++ (\texttt{enum\_n7.cpp}) and Python (\texttt{verify\_all.py}, \texttt{analyze\_n7\_and\_plot.py}) scripts reproduce all $994$ graphs of order $n \le 7$, all certificates, and Figures~\ref{fig:exhaustive}--\ref{fig:profile}.
+\section{Scope of the Lean~4 Arithmetic Verification}
+The companion Lean modules verify concrete integer matrix certificates, scaled integer Bessel and majorization lemmas, and polynomial inequalities. The spectral lemma assumes integer spectral data, Parseval and Rayleigh expansion hypotheses; it does not establish the real spectral theorem. The graph-to-matrix bridge, graph-family identities, real Ky Fan principle, full census and universal graph-level bounds are not formally verified. The analytical proofs use the cited mathematical literature. The numerical census uses floating-point eigenvalues and is not a certified minimality proof.
 
 \begin{thebibliography}{99}
 \bibitem{ABGP2021}
@@ -267,9 +261,9 @@ AIMS Mathematics \textbf{11} (2026), no.~10, 33617--33633; arXiv:2606.06945.
 \url{https://arxiv.org/abs/2606.06945}
 
 \bibitem{KT2026}
-K.~Kothari and A.~Tudose,
-\emph{Proof of Brouwer's Laplacian spectrum conjecture} (2026), cited in arXiv:2607.03388 and arXiv:2607.08452.
-\url{https://arxiv.org/html/2607.08452v2}
+P.~K.~Kothari and S.~Tudose,
+\emph{On Brouwer's Laplacian conjecture} (2026), arXiv:2606.12197.
+\url{https://arxiv.org/abs/2606.12197}
 
 \bibitem{MPK2026}
 U.~Mushtaq, S.~Pirzada, and S.~Khan,
