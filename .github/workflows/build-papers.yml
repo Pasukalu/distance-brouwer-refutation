@@ -1,0 +1,53 @@
+name: Build papers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "paper/**"
+      - ".github/workflows/build-papers.yml"
+  pull_request:
+    paths:
+      - "paper/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: paper-en
+            root: paper_en.tex
+            pdf: paper_en.pdf
+            engine: pdflatex
+          - name: paper-zh
+            root: paper_zh.tex
+            pdf: paper_zh.pdf
+            engine: lualatex
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile ${{ matrix.root }} (${{ matrix.engine }})
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: paper
+          root_file: ${{ matrix.root }}
+          os: debian
+          latexmk_use_lualatex: ${{ matrix.engine == 'lualatex' }}
+          # Noto CJK fonts are needed by paper_zh.tex (fontspec + babel chinese).
+          extra_system_packages: ${{ matrix.engine == 'lualatex' && 'fonts-noto-cjk' || '' }}
+          args: -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Upload ${{ matrix.pdf }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: paper/${{ matrix.pdf }}
+          if-no-files-found: error

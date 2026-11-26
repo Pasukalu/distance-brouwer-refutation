@@ -1,0 +1,35 @@
+name: Verify Lean proofs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lean/**"
+      - ".github/workflows/verify-lean.yml"
+  pull_request:
+    paths:
+      - "lean/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: lake build (zero sorry, zero dependencies)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: lake build
+        working-directory: lean
+        run: |
+          lake --version
+          lake build
