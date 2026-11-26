@@ -3,11 +3,11 @@
 [![Lean 4](https://img.shields.io/badge/Lean-4.36.0-blue.svg)](https://lean-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This repository contains the complete, formally verified refutation, exhaustive $n \le 7$ census ($994$ non-isomorphic connected graphs), publication-quality figures, and structural correction of two published spectral graph theory conjectures:
+This repository contains arithmetic certificates, numerical $n \le 7$ census ($994$ non-isomorphic connected graphs), publication-quality figures, and structural correction of two published spectral graph theory conjectures:
 
-1. **Alhevaz, Baghipur, Ganie, and Pirzada (2021)** (*Linear and Multilinear Algebra* **69**, 2423–2440; still studied as open in *J. Comb. Optim.* **52**(5), Nov 2026): for every connected non-path graph $G$ and $1 \le k \le n$,
+1. **Alhevaz, Baghipur, Ganie, and Pirzada (2021)** (*Linear and Multilinear Algebra* **69**, 2423–2440; studied in *J. Comb. Optim.* **52**(5), Nov 2026): for every connected non-path graph $G$ and $1 \le k \le n$,
    $$M_k^Q(G) = \sum_{i=1}^k \rho_i^Q(G) \le W(G) + \binom{k+2}{3}.$$
-2. **Zhou, Wang, and Chai (2025)** (*Computational and Applied Mathematics* **44**(3), 14; still studied as open in *AIMS Mathematics* **11**(10), Oct 2026): for every connected graph $G$ and $1 \le r \le n$,
+2. **Zhou, Wang, and Chai (2025)** (*Computational and Applied Mathematics* **44**(3), 2025; explicit counterexamples already reported by Huang (2026), arXiv:2606.06945): for every connected graph $G$ and $1 \le r \le n$,
    $$U_r(G) = \sum_{i=1}^r \partial_i^L(G) \le W(G) + \binom{r+2}{3}.$$
 
 ## Main Results
@@ -21,8 +21,8 @@ This repository contains the complete, formally verified refutation, exhaustive 
 - **Corrected Universal Theorem:**
   For every connected graph $G$ of order $n \ge 2$ and diameter $D = \operatorname{diam}(G)$, and every $1 \le r \le n$,
   $$U_r(G) \le W(G) + D\binom{r+1}{2}, \qquad M_r^Q(G) \le W(G) + D\binom{r+1}{2}.$$
-- **End-to-End Lean 4 Formalization (18 Theorems, Zero `sorry`, Zero External Dependencies):**
-  Includes formal proofs of Bessel's inequality, Ky Fan's Maximum Principle from spectral decomposition, the structural transmission-subset identity, distance-threshold decomposition, all 6 minimal orthogonal rational certificates, all 3 infinite $\Theta(n^3)$ families, and both corrected-bound core lemmas.
+- **Lean 4 arithmetic verification:**
+  Checks integer certificates, restricted scaled spectral lemmas and polynomial inequalities. Real spectral theory, full graph-level statements and certified census minimality remain unformalized. The numerical census is not an exact spectral proof; priority for the signless counterexamples remains unverified. Paths are excluded from the signless conjecture.
 
 ## Repository Structure
 
@@ -50,16 +50,21 @@ This repository contains the complete, formally verified refutation, exhaustive 
 
 ```bash
 # 1. Lean 4 formal verification (zero sorry, ~6s)
-cd lean && lake build
+(cd lean && lake build)
 
 # 2. Exact C++ n=7 enumeration (853 non-isomorphic connected graphs)
 g++ -O3 cpp/enum_n7.cpp -o enum_n7 && ./enum_n7 > n7_masks.txt
 
 # 3. Python full verification and figure generation
+python3 -m pip install -r requirements.txt
 python3 python/verify_all.py
 python3 python/analyze_n7_and_plot.py
 
 # 4. Compile English & Chinese papers
-cd paper && lualatex paper_en.tex && lualatex paper_en.tex
-lualatex paper_zh.tex && lualatex paper_zh.tex
+(cd paper && lualatex paper_en.tex && lualatex paper_en.tex && lualatex paper_zh.tex && lualatex paper_zh.tex)
 ```
+
+
+## Audit status
+
+The checked-in PDFs predate the audit revisions until rebuilt. Consult the LaTeX sources and CI artifacts. No claim of priority is made for the known distance Laplacian counterexamples. See `AUDIT.md` for remaining proof obligations.
