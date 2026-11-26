@@ -4,6 +4,9 @@ Full n <= 7 Exhaustive Analysis (all 994 non-isomorphic connected graphs:
 2 + 6 + 21 + 112 + 853) + Publication-Quality Figure Generation.
 """
 import os
+from pathlib import Path
+import networkx as nx
+ROOT = Path(__file__).resolve().parents[1]
 import json
 import numpy as np
 import matplotlib
@@ -51,7 +54,7 @@ by_diam_n7 = {}
 for n in [3, 4, 5, 6]:
     edges_all = list(combinations(range(n), 2))
     m_all = len(edges_all)
-    seen = set()
+    seen = {}
     records = []
     for mask in range(1 << m_all):
         if bin(mask).count("1") < n - 1:
@@ -69,16 +72,19 @@ for n in [3, 4, 5, 6]:
         eQ = np.linalg.eigvalsh(np.diag(tr) + D)[::-1]
         sig = (tuple(sorted(np.sum(adj, axis=1).tolist())), tuple(sorted(tr.tolist())),
                tuple(np.round(eL, 5).tolist()), tuple(np.round(eQ, 5).tolist()))
-        if sig in seen:
+        graph = nx.from_numpy_array(adj)
+        bucket = seen.setdefault(sig, [])
+        if any(nx.is_isomorphic(graph, old) for old in bucket):
             continue
-        seen.add(sig)
+        bucket.append(graph)
         records.append(analyze_graph(adj))
+    assert len(records) == {3: 2, 4: 6, 5: 21, 6: 112}[n]
     summary[n] = records
 
 # Now n=7 from n7_masks.txt
 edges_7 = list(combinations(range(7), 2))
 records_7 = []
-with open("research/n7_masks.txt") as f:
+with open(ROOT / "n7_masks.txt") as f:
     for line in f:
         mask = int(line.strip())
         adj = np.zeros((7, 7), int)
@@ -88,6 +94,7 @@ with open("research/n7_masks.txt") as f:
                 adj[u, v] = adj[v, u] = 1
         rec = analyze_graph(adj)
         records_7.append(rec)
+assert len(records_7) == 853
 summary[7] = records_7
 
 print("=== COMPLETE EXHAUSTIVE STATISTICS n = 3..7 (994 GRAPHS) ===")
@@ -123,7 +130,7 @@ for d in sorted(set(r["diam"] for r in records_7)):
 # ============================================================
 # GENERATE 3 PUBLICATION-QUALITY FIGURES (PDF + 300-DPI PNG)
 # ============================================================
-fig_dir = "research/repo/paper/figures"
+fig_dir = str(ROOT / "paper" / "figures")
 os.makedirs(fig_dir, exist_ok=True)
 plt.rcParams.update({
     "font.family": "serif",
