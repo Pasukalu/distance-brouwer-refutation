@@ -239,6 +239,44 @@ def stress(samples=400, nmax=13, seed=20261126):
     print("tightest corrected-bound margins:", [(round(m, 6), n, k, t) for m, n, k, t in worst[:8]])
     return fails
 
+def sharper_bound_stress(samples=300, nmax=13, seed=20261127):
+    """Test the conditional sharper bounds proposed in the phase-2 audit note:
+         U_r <= W + (D-1)C(r+1,2) + n*min(r,n-1) - C(n,2)
+         M_r^Q <= W + (D-1)C(r+1,2) + n + (n-2)r - C(n,2)
+    They are strictly below W + D*C(r+1,2) for r < n-1, so they are a genuine
+    strengthening *if* the derivation (ordinary Brouwer theorem + threshold
+    decomposition) is correct. This only collects computational evidence.
+    """
+    rng = np.random.default_rng(seed)
+    checked = fails = equal = 0
+    worst = []
+    for n in range(8, nmax + 1):
+        fam = [random_connected(n, rng) for _ in range(samples // 2)]
+        fam += [random_tree(n, rng) for _ in range(samples // 2)]
+        for rows in fam:
+            d = distances(n, rows)
+            L, Q, W, Dm = matrices(n, d)
+            evL = np.sort(np.linalg.eigvalsh(L))[::-1]
+            evQ = np.sort(np.linalg.eigvalsh(Q))[::-1]
+            checked += 1
+            for k in range(1, n + 1):
+                bL = W + (Dm - 1) * comb(k + 1, 2) + n * min(k, n - 1) - comb(n, 2)
+                bQ = W + (Dm - 1) * comb(k + 1, 2) + n + (n - 2) * k - comb(n, 2)
+                mL = bL - sum(evL[:k])
+                mQ = bQ - sum(evQ[:k])
+                worst.append((mL, "L", n, k))
+                worst.append((mQ, "Q", n, k))
+                if mL < -1e-9 or mQ < -1e-9:
+                    fails += 1
+                if abs(mL) < 1e-6 or abs(mQ) < 1e-6:
+                    equal += 1
+    worst.sort()
+    print(f"sharper-bound lead: {checked} graphs, failures={fails}, "
+          f"equality cases={equal}, tightest margins="
+          f"{[(round(m, 4), t, n, k) for m, t, n, k in worst[:6]]}")
+    return fails
+
+
 # ---------------------------------------------------------------- families
 def path_rows(n):
     return tuple((1 << (i - 1) if i > 0 else 0) | (1 << (i + 1) if i < n - 1 else 0) for i in range(n))
@@ -323,3 +361,5 @@ if __name__ == "__main__":
     if not quick:
         print("Phase-II sharper bound:")
         sharper_candidates(graphs, 7)
+        print("Sharper-bound lead (random graphs):")
+        sharper_bound_stress(samples=700, nmax=14)

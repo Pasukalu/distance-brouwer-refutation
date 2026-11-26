@@ -59,7 +59,7 @@
 对任意 $n$ 阶连通图 $G$ 及任意 $1 \le r \le n$，$U_r(G) \le W(G) + \binom{r+2}{3}$。
 \end{conjecture}
 
-直至 2026 年 11 月，Mushtaq 等 \cite{MPK2026}、均匀毛毛虫图论文 \cite{Caterpillar2026}、Huang \cite{Huang2026} 与 Zhang 与 Wang \cite{ZW2026} 仍在围绕这两个猜想发表部分图类证明。
+直至 2026 年 11 月，Mushtaq 等 \cite{MPK2026}、均匀毛毛虫图论文 \cite{Caterpillar2026}、Huang \cite{Huang2026} 与 Zhang、Wang 与 Miao \cite{ZW2026} 仍在围绕这两个猜想发表部分图类证明。需要说明：Alhevaz 等人的原文正文目前无法公开获取，但其非路径形式已被两篇 2026 年独立文献归于该文（Zhang--Wang--Miao 记为 $1\le k\le n$，Mushtaq--Pirzada--Khan 记为 $k=2,\dots,n$），两种范围并不一致；本文报告的所有反例均出现在 $k\ge 3$，在两种读法下均成立。Huang 的已发表版本显式给出 $U_2(K_{1,3})=14>13$ 与 $U_3(K_{1,4})=27>26$，故距离 Laplacian 一侧的证伪优先权属于 Huang，本文只作推广。
 
 \takeaway{核心贡献}{本文在 $n\le 7$ 全部 $994$ 个非同构连通图上完成穷举统计并给出最小反例的纯整数正交 Ky Fan 证书；通过 Schur 对角线控制解析证明三大无穷图族以 $\Theta(n^3)$ 量级同时证伪两猜想；揭示 $\binom{r+2}{3}$ 失效的几何根源并证明统一修正定理 $W(G)+\diam(G)\binom{r+1}{2}$；在 Lean~4 中验证部分整数算术证书和引理。}
 
@@ -115,7 +115,7 @@ $L(3,3)$ & 6 & $D^Q$ & 3 & $41$ & $1888/45$ & $(1,-1,0,0,0,0)$, $(1,1,1,1,1,2)$,
 令 $t=\lfloor n/3\rfloor$，$r=2t$。则：对一切 $n\ge 9$ 的路径 $P_n$、一切 $n\ge 10$ 的非路径扫帚树 $B(n-2,2)$ 及一切 $n\ge 12$（含 $n=10$）的单圈棒棒糖图 $L(3,n-3)$，仅取前 $r$ 大顶点传输度之和（Schur 主对角线控制）即严格大于 $W(G)+\binom{r+2}{3}$，其中路径不属于无符号猜想的适用范围；非路径图族同时证伪猜想~\ref{conj:DQ-zh} 与 \ref{conj:DL-zh}，且渐近超出量至少为 $\frac{5}{162}n^3-O(n^2)$；取最优比例 $r=(\sqrt{3}-1)n$ 时可达 $\bigl(\frac{\sqrt{3}}{2}-\frac{5}{6}\bigr)n^3-O(n^2)\approx 0.032692\,n^3$。
 \end{theorem}
 
-图~\ref{fig:cubic-zh} 展示了非路径扫帚树 $B(n-2,2)$ 在 $n\le 120$ 时的 $\Theta(n^3)$ 渐近收敛行为。此外，对 2026 年 5 月论文 \cite{Caterpillar2026} 所宣称的均匀毛毛虫图，12 阶梳子图（直径 $7$，$W=206$）在 $r=7$ 处数值谱和约为 $300.1092$，超过上界 $290$，超出量约为 $10.1092$；与该文图族定义的对应关系仍需独立核对。
+图~\ref{fig:cubic-zh} 展示了非路径扫帚树 $B(n-2,2)$ 在 $n\le 120$ 时的 $\Theta(n^3)$ 渐近收敛行为。此外，2026 年 5 月论文 \cite{Caterpillar2026} 的定理~3.2 断言：对直径至少 $6$ 的均匀毛毛虫图及一切 $1\le r\le n-1$，有 $U_r(G)\le W(G)+\binom{r+2}{3}$。该断言可被直接否定：取 $12$ 阶梳子图（脊 $P_6$，每个脊顶点恰挂 $1$ 片叶子，故 $\ell=1$、直径 $7$、$W=206$），在 $r=7\le n-1=11$ 处 $U_7\approx 300.1091677861>290$，超出约 $10.1092$；$16$ 阶梳子图（脊 $P_8$，直径 $9$）在 $r=9$ 处亦违反 $+5.4519$。
 
 \begin{figure}[!htbp]
 \centering
@@ -197,7 +197,7 @@ P.~K.~Kothari and S.~Tudose,
 \bibitem{MPK2026}
 U.~Mushtaq, S.~Pirzada, and S.~Khan,
 \emph{On the sum of the eigenvalues of the distance Laplacian matrix of graphs with diameter three and four},
-Rev. Un. Mat. Argentina \textbf{69} (2026), no.~1, 193--202.
+Rev. Un. Mat. Argentina \textbf{69} (2026), no.~1, 193--202, \texttt{doi:10.33044/revuma.5147}.
 \url{https://inmabb.criba.edu.ar/revuma/pdf/v69n1/v69n1a14.pdf}
 
 \bibitem{Caterpillar2026}
