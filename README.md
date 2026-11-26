@@ -1,15 +1,17 @@
 # Disproving and Correcting the Distance Laplacian and Distance Signless Laplacian Brouwer-Type Conjectures
 
+> **Phase II audit: not release-ready.** See [independent audit](verification/phase2-independent-audit-2026-11-26.md) for confirmed prior work, independent checks, and formalization limitations. The signless inequality studied here was already rejected as Question 1 in the original paper; the final conjecture is different. The distance Laplacian inequality also has previously published counterexamples. End-to-end real-spectral formalization is not established.
+
 [![Build papers](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/build-papers.yml/badge.svg)](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/build-papers.yml)
 [![Verify Lean proofs](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/verify-lean.yml/badge.svg)](https://github.com/Pasukalu/distance-brouwer-refutation/actions/workflows/verify-lean.yml)
 [![Lean 4](https://img.shields.io/badge/Lean-4.36.0-blue.svg)](https://lean-lang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This repository contains the complete, formally verified refutation, exhaustive $n \le 7$ census ($994$ non-isomorphic connected graphs), publication-quality figures, and structural correction of two published spectral graph theory conjectures:
+This repository contains the arithmetic certificates and analysis, exhaustive $n \le 7$ census ($994$ non-isomorphic connected graphs), publication-quality figures, and structural correction of two published spectral graph theory conjectures:
 
 1. **Alhevaz, Baghipur, Ganie, and Pirzada (2021)** (*Linear and Multilinear Algebra* **69**, 2423–2440; still studied as open in *J. Comb. Optim.* **52**(5), Nov 2026): for every connected non-path graph $G$ and $1 \le k \le n$,
    $$M_k^Q(G) = \sum_{i=1}^k \rho_i^Q(G) \le W(G) + \binom{k+2}{3}.$$
-2. **Zhou, Wang, and Chai (2025)** (*Computational and Applied Mathematics* **44**(3), 14; still studied as open in *AIMS Mathematics* **11**(10), Oct 2026): for every connected graph $G$ and $1 \le r \le n$,
+2. **Zhou, Wang, and Chai (2025)** (*Computational and Applied Mathematics* **44**, article 138; still studied as open in *AIMS Mathematics* **11**(10), Oct 2026): for every connected graph $G$ and $1 \le r \le n$,
    $$U_r(G) = \sum_{i=1}^r \partial_i^L(G) \le W(G) + \binom{r+2}{3}.$$
 
 ## Main Results
@@ -23,8 +25,8 @@ This repository contains the complete, formally verified refutation, exhaustive 
 - **Corrected Universal Theorem:**
   For every connected graph $G$ of order $n \ge 2$ and diameter $D = \operatorname{diam}(G)$, and every $1 \le r \le n$,
   $$U_r(G) \le W(G) + D\binom{r+1}{2}, \qquad M_r^Q(G) \le W(G) + D\binom{r+1}{2}.$$
-- **End-to-End Lean 4 Formalization (18 Theorems, Zero `sorry`, Zero External Dependencies):**
-  Includes formal proofs of Bessel's inequality, Ky Fan's Maximum Principle from spectral decomposition, the structural transmission-subset identity, distance-threshold decomposition, all 6 minimal orthogonal rational certificates, all 3 infinite $\Theta(n^3)$ families, and both corrected-bound core lemmas.
+- **Lean 4 arithmetic artifacts (full real-spectral bridge not verified):**
+  Includes formal proofs of Bessel's inequality, an integer spectral-weight inequality under supplied hypotheses, the structural transmission-subset identity, distance-threshold decomposition, all 6 minimal orthogonal rational certificates, all 3 infinite $\Theta(n^3)$ families, and both corrected-bound core lemmas.
 
 ## Repository Structure
 
