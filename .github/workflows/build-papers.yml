@@ -25,14 +25,14 @@ jobs:
           - name: paper-en
             root: paper_en.tex
             pdf: paper_en.pdf
-            engine: pdflatex
+            engine: lualatex
           - name: paper-zh
             root: paper_zh.tex
             pdf: paper_zh.pdf
             engine: lualatex
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Compile ${{ matrix.root }} (${{ matrix.engine }})
         uses: xu-cheng/latex-action@v4
